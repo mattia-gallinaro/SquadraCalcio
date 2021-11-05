@@ -4,7 +4,7 @@ namespace SquadraCalcio
 {
     class Squadra
     {
-        int partite_vinte, partite_perse, partite_pareggiate, gol_fatti, gol_subiti, punteggio;//attributi della classe Squadra
+        int partite_vinte, partite_perse, partite_pareggiate, gol_fatti, gol_subiti, punteggio, punteggio_totale;//attributi della classe Squadra
         public Squadra()//porta a 0 il valore degli attributi
         {
             this.partite_vinte = 0;//porta a 0 il valore della variabile "partite_vinte" nell'istanza corrente
@@ -13,6 +13,7 @@ namespace SquadraCalcio
             this.gol_fatti = 0;//porta a 0 il valore della variabile "gol_fatti" nell'istanza corrente
             this.gol_subiti = 0;//porta a 0 il valore della variabile "gol_subiti" nell'istanza corrente
             this.punteggio = 0;//porta a 0 il valore della variabile "punteggio" nell'istanza corrente
+            this.punteggio_totale = 0;//porta a 0 il valore della variabile "punteggio_totale" nell'istanza corrente
         }
         public int ControlloQuantità()//controllo che il valore inserito dall'utente sia un numero e che sia maggiore di 0, se non lo è allora ritorna -1
         {
@@ -52,7 +53,7 @@ namespace SquadraCalcio
         }
         public int Punti()//calcola il punteggio della squadra basato sul numero di vittorie ed il numero di pareggi dell'istanza corrente
         {
-            this.punteggio = (this.partite_vinte * 3) + (this.partite_pareggiate * 1);//assegna alla variabile punteggio dell'istanza corrente,lo somma tra il numero delle partite vinte dalla squadra corrente moltiplicato per 3 ed il numero delle partite pareggiate della squadra corrente 
+            this.punteggio = (this.partite_vinte * 3) + (this.partite_pareggiate * 1);//assegna alla variabile punteggio dell'istanza corrente,lo somma tra il numero delle partite vinte dalla squadra corrente moltiplicato per 3 ed il numero delle partite pareggiate della squadra corrente                                                                          //
             return this.punteggio;//ritorna il punteggio della squadra corrente
         }
         public void Gol_Fatti(int gol)//assegna il valore di gol fatti alla variabile gol_fatti e li aggiunge alla variabile totale_gol_fatti dell'istanza corrente
@@ -85,10 +86,19 @@ namespace SquadraCalcio
             risposte[0] = risposte[2];//assegna il valore di risposte[2] ad risposte[0]
             risposte[2] = n3;//assegna il valore della variabile di scambio, quindi risposte[0], a risposte[2]
         }
+        public void IncrementoPunteggio()
+        {
+            this.punteggio_totale = this.punteggio_totale + this.punteggio;
+        }
+        public int ReturnPunteggioTotale()
+        {
+            return this.punteggio_totale;
+        }
         public override string ToString()//ritorna una stringa in cui mostra il numero di partite vinte, di partite pareggiate e di partite perse della squadra corrente
         {
             return $"Numero partite vinte: {this.partite_vinte}\nNumero partite pareggiate: {this.partite_pareggiate}\nNumero partite perse: {this.partite_perse}\n";
         }
+
         static void Main(string[] args)
         {
             Squadra Juventus = new Squadra();//crea l'oggetto Juventus della classe Squadra
@@ -160,12 +170,26 @@ namespace SquadraCalcio
                 {
                     Console.WriteLine("Ha vinto la Juventus");//scrive a schermo "Ha vino Milan"
                 }
+                Juventus.IncrementoPunteggio();
+                Milan.IncrementoPunteggio();
                 Juventus.InizioAnno();
                 Milan.InizioAnno();
                 answer = "";
                 Console.WriteLine("Scrivi yes o y per terminare il campionato");
                 answer = Console.ReadLine();
             } while (answer != "yes" && answer != "y");
+            if(Juventus.ReturnPunteggioTotale() < Milan.ReturnPunteggioTotale())
+            {
+                Console.WriteLine($"Il vincitore del campionato e' Milan con {Milan.ReturnPunteggioTotale()} punti");
+            }
+            else if(Juventus.ReturnPunteggioTotale() == Milan.ReturnPunteggioTotale())
+            {
+                Console.WriteLine($"Il campionato è terminato in un pareggio");
+            }
+            else
+            {
+                Console.WriteLine($"Il vincitore del campionato e' Juventus con {Juventus.ReturnPunteggioTotale()} punti");
+            }
         }
     }
 }

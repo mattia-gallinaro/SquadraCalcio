@@ -1,0 +1,13 @@
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\bin\Debug\netcoreapp3.1\SquadraCalcio.exe
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\bin\Debug\netcoreapp3.1\SquadraCalcio.deps.json
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\bin\Debug\netcoreapp3.1\SquadraCalcio.runtimeconfig.json
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\bin\Debug\netcoreapp3.1\SquadraCalcio.runtimeconfig.dev.json
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\bin\Debug\netcoreapp3.1\SquadraCalcio.dll
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\bin\Debug\netcoreapp3.1\SquadraCalcio.pdb
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\obj\Debug\netcoreapp3.1\SquadraCalcio.csproj.AssemblyReference.cache
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\obj\Debug\netcoreapp3.1\SquadraCalcio.AssemblyInfoInputs.cache
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\obj\Debug\netcoreapp3.1\SquadraCalcio.AssemblyInfo.cs
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\obj\Debug\netcoreapp3.1\SquadraCalcio.csproj.CoreCompileInputs.cache
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\obj\Debug\netcoreapp3.1\SquadraCalcio.dll
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\obj\Debug\netcoreapp3.1\SquadraCalcio.pdb
+E:\4F\SquadraCalcio-main\SquadraCalcio-main\SquadraCalcio\SquadraCalcio\obj\Debug\netcoreapp3.1\SquadraCalcio.genruntimeconfig.cache

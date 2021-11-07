@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SquadraCalcio
 {
     class Squadra
     {
+        public string nomesquadra { get; set; }
         int partite_vinte, partite_perse, partite_pareggiate, gol_fatti, gol_subiti, punteggio, punteggio_totale;//attributi della classe Squadra
         public Squadra()//porta a 0 il valore degli attributi
         {
+            this.nomesquadra = "";
             this.partite_vinte = 0;//porta a 0 il valore della variabile "partite_vinte" nell'istanza corrente
             this.partite_perse = 0;//porta a 0 il valore della variabile "partite_perse" nell'istanza corrente
             this.partite_pareggiate = 0;//porta a 0 il valore della variabile "partite_pareggiate" nell'istanza corrente
@@ -34,6 +37,28 @@ namespace SquadraCalcio
             {
                 return -1;//
             }
+        }
+        public bool NomiSoloDiversi(string[] nomi)//controllo che il nome inserito non sia già stato inserito come nome di un'altra squadra
+        {
+            bool controllo = false;
+            for(int i = 0; i < nomi.Length-1 && !controllo; i++)
+            {
+                if(nomi[nomi.Length-1] == nomi[i])
+                {
+                    controllo = true;
+                }
+            }
+            return controllo;
+        }
+        public List<Squadra> CreaSqaudre(string[] nomi)
+        {
+            List<Squadra> creazione = new List<Squadra>();
+            for(int i  = 0; i < nomi.Length; i++)
+            {
+                creazione.Add(new Squadra());
+                creazione[i].nomesquadra = nomi[i];
+            }
+            return creazione;
         }
         public void AumentoPartite()//in base al valore degli attributi gol_fatti e gol_subiti e aumenta il numero di partite vinte, perse oppure pareggiate dell'istanza corrente 
         {
@@ -101,6 +126,28 @@ namespace SquadraCalcio
 
         static void Main(string[] args)
         {
+            List<Squadra> squadre = new List<Squadra>();
+            Squadra squadra = new Squadra();
+            int risposta;
+            string[] nomi;
+            do
+            {
+                Console.WriteLine("Inserisci il numero di squadre");
+                risposta = squadra.ControlloQuantità();
+            } while (risposta < 0 || risposta % 2 != 0);
+            nomi = new string[risposta];
+            for(int i = 0; i < risposta; i++)
+            {
+                Console.WriteLine($"Inserisci il nome della squadra numero {i+1}");
+                nomi[i] = Console.ReadLine();
+                if(squadra.NomiSoloDiversi(nomi))
+                {
+                    Console.WriteLine("Questo nome e' gia' stato inserito");
+                    i--;
+                }
+            }
+            squadre = squadra.CreaSqaudre(nomi);
+            //squadre[risposta].AssegnazioneValori();
             Squadra Juventus = new Squadra();//crea l'oggetto Juventus della classe Squadra
             Squadra Milan = new Squadra();//crea l'oggetto Milan della classe Squadra
             int[] risposte = new int[5];//array di interi per immagazzinare le risposte dell'utente che verranno usate per assegnare le variabili 

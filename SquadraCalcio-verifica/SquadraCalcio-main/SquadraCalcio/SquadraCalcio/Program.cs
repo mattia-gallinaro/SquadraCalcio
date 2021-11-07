@@ -38,12 +38,12 @@ namespace SquadraCalcio
                 return -1;//
             }
         }
-        public bool NomiSoloDiversi(string[] nomi)//controllo che il nome inserito non sia già stato inserito come nome di un'altra squadra
+        public bool NomiSoloDiversi(string[] nomi, string nome)//controllo che il nome inserito non sia già stato inserito come nome di un'altra squadra
         {
             bool controllo = false;
-            for(int i = 0; i < nomi.Length-1 && !controllo; i++)
+            for(int i = 0; i < nomi.Length && !controllo; i++)
             {
-                if(nomi[nomi.Length-1] == nomi[i])
+                 if(nomi[i] == nome)
                 {
                     controllo = true;
                 }
@@ -111,6 +111,58 @@ namespace SquadraCalcio
             risposte[0] = risposte[2];//assegna il valore di risposte[2] ad risposte[0]
             risposte[2] = n3;//assegna il valore della variabile di scambio, quindi risposte[0], a risposte[2]
         }
+        public int[] GenerazionePartite(List<Squadra> squadrone)//genero gli indici della lista delle squadre in modo e senza doppioni
+                                                                //in seguito verranno raggruppati a due a due
+        {
+            int[] array  = new int[squadrone.Count];
+            Random random = new Random();
+            int numero_generato = 0;
+            bool controllo = false;
+            for(int i = 0; i< array.Length; i++)
+            {
+                numero_generato = random.Next(0, squadrone.Count);
+                if(i > 1)
+                {
+                    for (int j = 0; j < i; j++)
+                    {
+                        if(array[j] == numero_generato)
+                        {
+                            controllo = true;
+                        }
+                                
+                    }
+                }
+                else
+                {
+                    array[i] = numero_generato;
+                }
+                if (controllo)
+                {
+                    //el se tratta de un doppion
+                    i--;
+                    controllo = false;
+                }
+                else
+                {
+                    array[i] = numero_generato;
+                }
+            }
+            foreach (int i in array)
+            {
+                Console.WriteLine($"{i}");
+            }
+            return array;
+        }
+        //per entrambi i due metodi successivi verranno riordinati tramite insertion sort, in caso di punteggi uguali verrà controllato anche il numero di gol segnati totali
+        public void ClassificaProvvisoria(List<Squadra> scarsoni)
+        {
+
+        }
+        //per entrambi i due metodi successivi verranno riordinati tramite insertion sort, in caso di punteggi uguali verrà controllato anche il numero di gol segnati totali
+        public void ClassificaDefinitiva(List<Squadra> insertion)
+        {
+
+        }
         public void IncrementoPunteggio()
         {
             this.punteggio_totale = this.punteggio_totale + this.punteggio;
@@ -130,28 +182,53 @@ namespace SquadraCalcio
             Squadra squadra = new Squadra();
             int risposta;
             string[] nomi;
+            string selezione;
             do
             {
                 Console.WriteLine("Inserisci il numero di squadre");
                 risposta = squadra.ControlloQuantità();
-            } while (risposta < 0 || risposta % 2 != 0);
+            } while (risposta < 2 || risposta % 2 != 0);
             nomi = new string[risposta];
             for(int i = 0; i < risposta; i++)
             {
                 Console.WriteLine($"Inserisci il nome della squadra numero {i+1}");
-                nomi[i] = Console.ReadLine();
-                if(squadra.NomiSoloDiversi(nomi))
+                selezione = Console.ReadLine();
+                if(squadra.NomiSoloDiversi(nomi, selezione))
                 {
                     Console.WriteLine("Questo nome e' gia' stato inserito");
                     i--;
                 }
+                else
+                {
+                    nomi[i] = selezione;
+                }
             }
             squadre = squadra.CreaSqaudre(nomi);
+            int[] risposte = new int[5];//array di interi per immagazzinare le risposte dell'utente che verranno usate per assegnare le variabili 
+            for (int i = 0; i < squadre.Count; i++)
+            {
+                do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
+                {
+                    Console.WriteLine($"Inserisci le partite vinte della {squadre[i].nomesquadra}");//scrive a schermo "Inserisci le partite vinte della Juventus"
+                    risposte[0] = squadre[i].ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al primo livello dell'array risposte
+                } while (risposte[0] < 0);
+                do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
+                {
+                    Console.WriteLine($"Inserisci le partite pareggiate della {squadre[i].nomesquadra}");//scrive a schermo "Inserisci le partite pareggiate della Juventus"
+                    risposte[1] = squadre[i].ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al secondo livello dell'array risposte
+                } while (risposte[1] < 0);
+                do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
+                {
+                    Console.WriteLine($"Inserisci le partite perse della {squadre[i].nomesquadra}");//scrive a schermo "Inserisci le partite perse della Juventus"
+                    risposte[2] = squadre[i].ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al terzo livello dell'array risposte
+                } while (risposte[2] < 0);
+                squadre[i].AssegnazioneValori(risposte);//invoca la funzione AssegnazioneValori della classe Squadra per l'oggetto Juventus e come argomento pone l'array contenente le risposte alle domande sopra 
+            }
             //squadre[risposta].AssegnazioneValori();
             Squadra Juventus = new Squadra();//crea l'oggetto Juventus della classe Squadra
             Squadra Milan = new Squadra();//crea l'oggetto Milan della classe Squadra
-            int[] risposte = new int[5];//array di interi per immagazzinare le risposte dell'utente che verranno usate per assegnare le variabili 
-            do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
+            int [] indici  = squadra.GenerazionePartite(squadre);
+            /*do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
             {
                 Console.WriteLine("Inserisci le partite vinte della Juventus");//scrive a schermo "Inserisci le partite vinte della Juventus"
                 risposte[0] = Juventus.ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al primo livello dell'array risposte
@@ -165,7 +242,7 @@ namespace SquadraCalcio
             {
                 Console.WriteLine("Inserisci le partite perse della Juventus");//scrive a schermo "Inserisci le partite perse della Juventus"
                 risposte[2] = Juventus.ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al terzo livello dell'array risposte
-            } while (risposte[2] < 0);
+            } while (risposte[2] < 0);*/
 
             Juventus.AssegnazioneValori(risposte);//invoca la funzione AssegnazioneValori della classe Squadra per l'oggetto Juventus e come argomento pone l'array contenente le risposte alle domande sopra 
 

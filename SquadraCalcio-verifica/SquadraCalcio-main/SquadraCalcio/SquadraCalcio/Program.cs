@@ -121,7 +121,7 @@ namespace SquadraCalcio
             for(int i = 0; i< array.Length; i++)
             {
                 numero_generato = random.Next(0, squadrone.Count);
-                if(i > 1)
+                if(i > 1)//inizia a controllare appena avrà generato il secondo numero
                 {
                     for (int j = 0; j < i; j++)
                     {
@@ -136,9 +136,9 @@ namespace SquadraCalcio
                 {
                     array[i] = numero_generato;
                 }
-                if (controllo)
+                if (controllo)//se si tratta di un doppione fa ripetere la generazione del numero 
                 {
-                    //el se tratta de un doppion
+                    
                     i--;
                     controllo = false;
                 }
@@ -152,6 +152,10 @@ namespace SquadraCalcio
                 Console.WriteLine($"{i}");
             }
             return array;
+        }
+        public void GestionePartita(ref List<Squadra> wewewewe, int[] valori)
+        {
+
         }
         //per entrambi i due metodi successivi verranno riordinati tramite insertion sort, in caso di punteggi uguali verrà controllato anche il numero di gol segnati totali
         public void ClassificaProvvisoria(List<Squadra> scarsoni)
@@ -225,9 +229,36 @@ namespace SquadraCalcio
                 squadre[i].AssegnazioneValori(risposte);//invoca la funzione AssegnazioneValori della classe Squadra per l'oggetto Juventus e come argomento pone l'array contenente le risposte alle domande sopra 
             }
             //squadre[risposta].AssegnazioneValori();
-            Squadra Juventus = new Squadra();//crea l'oggetto Juventus della classe Squadra
-            Squadra Milan = new Squadra();//crea l'oggetto Milan della classe Squadra
-            int [] indici  = squadra.GenerazionePartite(squadre);
+            //Squadra Juventus = new Squadra();//crea l'oggetto Juventus della classe Squadra
+            //Squadra Milan = new Squadra();//crea l'oggetto Milan della classe Squadra
+            int[] indici;
+            string answer;
+            do
+            {
+                answer = "";
+                for (;answer != "No";)
+                {
+                    indici = squadra.GenerazionePartite(squadre);
+                    for (int i = 0; i < (indici.Length / 2); i+=2)
+                    {
+                        do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
+                        {
+                            Console.WriteLine($"Inserisci il numero di gol fatti dalla squadra {squadre[i].nomesquadra}");
+                            risposte[3] = squadra.ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al quarto livello dell'array risposte
+                        } while (risposte[3] < 0);
+                        do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
+                        {
+                            Console.WriteLine($"Inserisci il numero di gol fatti dalla squadra {squadre[i+1].nomesquadra}");
+                            risposte[4] = squadra.ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al quinto livello dell'array risposte
+                        } while (risposte[4] < 0);
+
+                        squadra.GestionePartita(ref squadre,)
+                    }
+                }
+                Console.WriteLine("Scrivi yes o y per terminare il campionato");
+                answer = Console.ReadLine();
+            } while (answer != "yes" || answer != "y");
+            Console.WriteLine("IL codicce è ancora in continuazione");
             /*do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
             {
                 Console.WriteLine("Inserisci le partite vinte della Juventus");//scrive a schermo "Inserisci le partite vinte della Juventus"
@@ -244,7 +275,7 @@ namespace SquadraCalcio
                 risposte[2] = Juventus.ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al terzo livello dell'array risposte
             } while (risposte[2] < 0);*/
 
-            Juventus.AssegnazioneValori(risposte);//invoca la funzione AssegnazioneValori della classe Squadra per l'oggetto Juventus e come argomento pone l'array contenente le risposte alle domande sopra 
+            /*Juventus.AssegnazioneValori(risposte);//invoca la funzione AssegnazioneValori della classe Squadra per l'oggetto Juventus e come argomento pone l'array contenente le risposte alle domande sopra 
 
             Console.WriteLine("\nDati Juventus:\n");
             Console.WriteLine(Juventus.ToString());//invoca la funzione ToString() della classe Squadra per l'oggetto Juventus che ritorna una stringa contenente i dati inseriti dall'utente 
@@ -254,7 +285,7 @@ namespace SquadraCalcio
             Milan.ScambioValori(ref risposte);//invoca la funzione ScambioValori della classe Squadra per invertire le partite vinte della Juventus con le partite perse della Juventus nell'array risposte
             Milan.AssegnazioneValori(risposte);//invoca la funzione AssegnazioneValori della classe Squadra per l'oggetto Milan e come argomento pone l'array contenente le risposte alle domande sopra 
             Console.WriteLine(Milan.ToString());//invoca la funzione ToString() della classe Squadra per l'oggetto Milan che ritorna una stringa contenente i dati inseriti dall'utente 
-            string answer = "";//stringa per terminare l'anno ed il campionato
+            answer = "";//stringa per terminare l'anno ed il campionato
             do
             {
                 answer = "";
@@ -313,7 +344,7 @@ namespace SquadraCalcio
             else
             {
                 Console.WriteLine($"Il vincitore del campionato e' Juventus con {Juventus.ReturnPunteggioTotale()} punti");
-            }
+            }*/
         }
     }
 }

@@ -208,7 +208,7 @@ namespace SquadraCalcio
                 }
             }
             squadre = squadra.CreaSqaudre(nomi);
-            int[] risposte = new int[5];//array di interi per immagazzinare le risposte dell'utente che verranno usate per assegnare le variabili 
+            int[] risposte = new int[6];//array di interi per immagazzinare le risposte dell'utente che verranno usate per assegnare le variabili 
             for (int i = 0; i < squadre.Count; i++)
             {
                 do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
@@ -252,7 +252,19 @@ namespace SquadraCalcio
                             risposte[4] = squadra.ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al quinto livello dell'array risposte
                         } while (risposte[4] < 0);
 
-                        squadra.GestionePartita(ref squadre,)
+                        risposte[5] = squadra.GestionePartita(ref squadre,risposte);
+                        if(risposte[5] == 1)
+                        {
+Console.WriteLine($"in questa partita ha vinto la squadra {squadra[i].nomesquadra}");
+                        }
+if(risposte[5] == 2)
+{
+Console.WriteLine($"In questa partita ha vinto la squadra {squadra[i].nomesquadra}");
+}
+else
+{
+Console.WriteLine("Questa partita è terminata in pareggio");
+}
                     }
                 }
                 Console.WriteLine("Scrivi yes o y per terminare il campionato");

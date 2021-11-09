@@ -153,9 +153,10 @@ namespace SquadraCalcio
             }
             return array;
         }
-        public void GestionePartita(ref List<Squadra> wewewewe, int[] valori)
+        public int GestionePartita(ref List<Squadra> wewewewe, int[] valori, int indice1, int indice2)
         {
-
+wewewewe[indice1].GolFatto(valori[]);
+return 0;
         }
         //per entrambi i due metodi successivi verranno riordinati tramite insertion sort, in caso di punteggi uguali verrà controllato anche il numero di gol segnati totali
         public void ClassificaProvvisoria(List<Squadra> scarsoni)

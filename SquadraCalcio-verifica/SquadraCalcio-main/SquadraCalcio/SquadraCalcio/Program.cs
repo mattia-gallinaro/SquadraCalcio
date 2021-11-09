@@ -76,10 +76,11 @@ namespace SquadraCalcio
                 this.partite_vinte++;//aumenta di 1 il numero delle partite vinte dell'istanza corrente 
             }       
         }
-        public int Punti()//calcola il punteggio della squadra basato sul numero di vittorie ed il numero di pareggi dell'istanza corrente
+        public void Punti()//calcola il punteggio della squadra basato sul numero di vittorie ed il numero di pareggi dell'istanza corrente
         {
             this.punteggio = (this.partite_vinte * 3) + (this.partite_pareggiate * 1);//assegna alla variabile punteggio dell'istanza corrente,lo somma tra il numero delle partite vinte dalla squadra corrente moltiplicato per 3 ed il numero delle partite pareggiate della squadra corrente                                                                          //
-            return this.punteggio;//ritorna il punteggio della squadra corrente
+            this.IncrementoPunteggio();
+            //return this.punteggio;//ritorna il punteggio della squadra corrente
         }
         public void Gol_Fatti(int gol)//assegna il valore di gol fatti alla variabile gol_fatti e li aggiunge alla variabile totale_gol_fatti dell'istanza corrente
         {
@@ -121,7 +122,7 @@ namespace SquadraCalcio
             for(int i = 0; i< array.Length; i++)
             {
                 numero_generato = random.Next(0, squadrone.Count);
-                if(i > 1)//inizia a controllare appena avrà generato il secondo numero
+                if(i >= 1)//inizia a controllare appena avrà generato il secondo numero
                 {
                     for (int j = 0; j < i; j++)
                     {
@@ -155,17 +156,58 @@ namespace SquadraCalcio
         }
         public int GestionePartita(ref List<Squadra> wewewewe, int[] valori, int indice1, int indice2)
         {
-wewewewe[indice1].GolFatto(valori[]);
-return 0;
+            wewewewe[indice1].Gol_Fatti(valori[3]);
+            wewewewe[indice2].Gol_Fatti(valori[4]);
+            wewewewe[indice1].AumentoPartite();
+            wewewewe[indice2].AumentoPartite();
+            wewewewe[indice1].Punti();
+            wewewewe[indice2].Punti();
+            if (valori[3] > valori[4])
+            {
+                return 2;
+            }
+            else if (valori[3] < valori[4])
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
-        //per entrambi i due metodi successivi verranno riordinati tramite insertion sort, in caso di punteggi uguali verrà controllato anche il numero di gol segnati totali
-        public void ClassificaProvvisoria(List<Squadra> scarsoni)
+        //per entrambi i due metodi successivi verranno riordinati tramite bubble sort, in caso di punteggi uguali verrà controllato anche il numero di gol segnati totali
+        public void ClassificaProvvisoria(ref List<Squadra> scarsoni)
         {
-
+            bool controllo;
+            do
+            {
+                controllo = false;
+                for(int i  = 0; i < (scarsoni.Count-1); i++)
+                {
+                    if(scarsoni[i].punteggio < scarsoni[i+1].punteggio)
+                    {
+                        scarsoni.Reverse(i, 2);//scambio i due elementi della lista 
+                        controllo = true;
+                    }
+                }
+            } while (controllo);
         }
-        //per entrambi i due metodi successivi verranno riordinati tramite insertion sort, in caso di punteggi uguali verrà controllato anche il numero di gol segnati totali
-        public void ClassificaDefinitiva(List<Squadra> insertion)
+        //per entrambi i due metodi successivi verranno riordinati tramite bubble sort, in caso di punteggi uguali verrà controllato anche il numero di gol segnati totali
+        public void ClassificaDefinitiva(ref List<Squadra> bubble)
         {
+            bool controllo;
+            do
+            {
+                controllo = false;
+                for (int i = 0; i < (bubble.Count - 1); i++)
+                {
+                    if (bubble[i].punteggio_totale < bubble[i+1].punteggio_totale)
+                    {
+                        bubble.Reverse(i, 2);//scambio i due elementi della lista 
+                        controllo = true;
+                    }
+                }
+            } while (controllo);
 
         }
         public void IncrementoPunteggio()
@@ -229,6 +271,11 @@ return 0;
                 } while (risposte[2] < 0);
                 squadre[i].AssegnazioneValori(risposte);//invoca la funzione AssegnazioneValori della classe Squadra per l'oggetto Juventus e come argomento pone l'array contenente le risposte alle domande sopra 
             }
+            Console.Clear();
+            for( int  i = 0; i < squadre.Count; i++)
+            {
+                Console.WriteLine($"{squadre[i].ToString()}");
+            }
             //squadre[risposta].AssegnazioneValori();
             //Squadra Juventus = new Squadra();//crea l'oggetto Juventus della classe Squadra
             //Squadra Milan = new Squadra();//crea l'oggetto Milan della classe Squadra
@@ -237,11 +284,13 @@ return 0;
             do
             {
                 answer = "";
-                for (;answer != "No";)
+                for (int c = 0 ; c < 365 && answer != "No"; c++)
                 {
+                    Console.WriteLine($"Giornata {c + 1} di 365");
                     indici = squadra.GenerazionePartite(squadre);
-                    for (int i = 0; i < (indici.Length / 2); i+=2)
+                    for (int i = 0; i < indici.Length; i+=2)
                     {
+                        Console.WriteLine($"Girone {i+1} di {indici.Length/2}");
                         do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
                         {
                             Console.WriteLine($"Inserisci il numero di gol fatti dalla squadra {squadre[i].nomesquadra}");
@@ -253,24 +302,38 @@ return 0;
                             risposte[4] = squadra.ControlloQuantità();//invoca la funzione ControlloQuantità della classe Squadra e ritorna un valore che viene poi assegnato al quinto livello dell'array risposte
                         } while (risposte[4] < 0);
 
-                        risposte[5] = squadra.GestionePartita(ref squadre,risposte);
-                        if(risposte[5] == 1)
+                        risposte[5] = squadra.GestionePartita(ref squadre,risposte, indici[i], indici[i+1]);
+                        if(risposte[5] == 2)
                         {
-Console.WriteLine($"in questa partita ha vinto la squadra {squadra[i].nomesquadra}");
+                            Console.WriteLine($"in questa partita ha vinto la squadra {squadre[i].nomesquadra}");
                         }
-if(risposte[5] == 2)
-{
-Console.WriteLine($"In questa partita ha vinto la squadra {squadra[i].nomesquadra}");
-}
-else
-{
-Console.WriteLine("Questa partita è terminata in pareggio");
-}
+                        else if(risposte[5] == 1)
+                        {
+                            Console.WriteLine($"In questa partita ha vinto la squadra {squadre[i+1].nomesquadra}");
+                        }
+                        else
+                        {
+                        Console.WriteLine("Questa partita è terminata in pareggio");
+                        }
                     }
+                    Console.WriteLine("Scrivi No per terminare l'anno");
+                    answer = Console.ReadLine();
+                }
+                squadra.ClassificaProvvisoria(ref squadre);
+                for(int i  = 0; i < squadre.Count; i++)
+                {
+                    Console.WriteLine($"In {i+1}° posizione abbiamo la squadra {squadre[i].nomesquadra}");
+                    squadre[i].InizioAnno();
                 }
                 Console.WriteLine("Scrivi yes o y per terminare il campionato");
                 answer = Console.ReadLine();
-            } while (answer != "yes" || answer != "y");
+            } while (answer != "yes" && answer != "y");
+            squadra.ClassificaDefinitiva(ref squadre);
+            for (int i = 0; i < squadre.Count; i++)
+            {
+                Console.WriteLine($"In {i + 1}° posizione abbiamo la squadra {squadre[i].nomesquadra}");
+            }
+            Console.WriteLine("Grazie per aver giocato ");
             Console.WriteLine("IL codicce è ancora in continuazione");
             /*do//continua a chiedere fino a quando l'utente mette una valore maggiore od uguale a 0
             {

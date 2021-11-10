@@ -9,14 +9,14 @@ namespace SquadraCalcio
         int partite_vinte, partite_perse, partite_pareggiate, gol_fatti, gol_subiti, punteggio, punteggio_totale;//attributi della classe Squadra
         public Squadra()//porta a 0 il valore degli attributi
         {
-            this.nomesquadra = "";
-            this.partite_vinte = 0;//porta a 0 il valore della variabile "partite_vinte" nell'istanza corrente
-            this.partite_perse = 0;//porta a 0 il valore della variabile "partite_perse" nell'istanza corrente
-            this.partite_pareggiate = 0;//porta a 0 il valore della variabile "partite_pareggiate" nell'istanza corrente
-            this.gol_fatti = 0;//porta a 0 il valore della variabile "gol_fatti" nell'istanza corrente
-            this.gol_subiti = 0;//porta a 0 il valore della variabile "gol_subiti" nell'istanza corrente
-            this.punteggio = 0;//porta a 0 il valore della variabile "punteggio" nell'istanza corrente
-            this.punteggio_totale = 0;//porta a 0 il valore della variabile "punteggio_totale" nell'istanza corrente
+            nomesquadra = "";
+            partite_vinte = 0;//porta a 0 il valore della variabile "partite_vinte" nell'istanza corrente
+            partite_perse = 0;//porta a 0 il valore della variabile "partite_perse" nell'istanza corrente
+            partite_pareggiate = 0;//porta a 0 il valore della variabile "partite_pareggiate" nell'istanza corrente
+            gol_fatti = 0;//porta a 0 il valore della variabile "gol_fatti" nell'istanza corrente
+            gol_subiti = 0;//porta a 0 il valore della variabile "gol_subiti" nell'istanza corrente
+            punteggio = 0;//porta a 0 il valore della variabile "punteggio" nell'istanza corrente
+            punteggio_totale = 0;//porta a 0 il valore della variabile "punteggio_totale" nell'istanza corrente
         }
         public int ControlloQuantità()//controllo che il valore inserito dall'utente sia un numero e che sia maggiore di 0, se non lo è allora ritorna -1
         {
@@ -62,45 +62,45 @@ namespace SquadraCalcio
         }
         public void AumentoPartite()//in base al valore degli attributi gol_fatti e gol_subiti e aumenta il numero di partite vinte, perse oppure pareggiate dell'istanza corrente 
         {
-            if (this.gol_fatti < this.gol_subiti)//controlla se il numero di gol_fatti siano minori dei gol_subiti
+            if (gol_fatti < gol_subiti)//controlla se il numero di gol_fatti siano minori dei gol_subiti
                                                  //se si verifica questa condizione allora verrà aumentata la variabile partite
             {
-                this.partite_perse++;//aumenta la variabile partite_perse dell'istanza corrente 
+                partite_perse++;//aumenta la variabile partite_perse dell'istanza corrente 
             }
-            else if (this.gol_fatti == this.gol_subiti)//controlla che il numero di gol fatti siano lo stesso del numero di gol subiti
+            else if (gol_fatti == gol_subiti)//controlla che il numero di gol fatti siano lo stesso del numero di gol subiti
             {
-                this.partite_pareggiate++;//aumenta di 1 il numero delle partite pareggiate dell'istanza corrente 
+                partite_pareggiate++;//aumenta di 1 il numero delle partite pareggiate dell'istanza corrente 
             }
             else
             {
-                this.partite_vinte++;//aumenta di 1 il numero delle partite vinte dell'istanza corrente 
+                partite_vinte++;//aumenta di 1 il numero delle partite vinte dell'istanza corrente 
             }       
         }
         public void Punti()//calcola il punteggio della squadra basato sul numero di vittorie ed il numero di pareggi dell'istanza corrente
         {
-            this.punteggio = (this.partite_vinte * 3) + (this.partite_pareggiate * 1);//assegna alla variabile punteggio dell'istanza corrente,lo somma tra il numero delle partite vinte dalla squadra corrente moltiplicato per 3 ed il numero delle partite pareggiate della squadra corrente                                                                          //
+            punteggio = (partite_vinte * 3) + (partite_pareggiate * 1);//assegna alla variabile punteggio dell'istanza corrente,lo somma tra il numero delle partite vinte dalla squadra corrente moltiplicato per 3 ed il numero delle partite pareggiate della squadra corrente                                                                          //
         }
         public void Gol_Fatti(int gol)//assegna il valore di gol fatti alla variabile gol_fatti e li aggiunge alla variabile totale_gol_fatti dell'istanza corrente
         {
-            this.gol_fatti = gol;//assegna il numero di gol che l'utente ha inserito da tastiera alla variabile gol_fatti dell'istanza corrente
+            gol_fatti = gol;//assegna il numero di gol che l'utente ha inserito da tastiera alla variabile gol_fatti dell'istanza corrente
         }
         public void Gol_Subiti(int gol)//assegna il valore di gol subiti alla variabile gol_subiti e li aggiunge alla variabile totale_gol_subiti
         {
-            this.gol_subiti = gol;//assegna il valore di gol alla variabile gol_subiti dell'istanza corrente
+            gol_subiti = gol;//assegna il valore di gol alla variabile gol_subiti dell'istanza corrente
         }
         public void AssegnazioneValori(int[] valori)//assegna i valori specificati dall'utente all'istanza corrente quindi prima alla Juventus e dopo al Milan
         {
-            this.partite_vinte = valori[0];//assegna il primo valore che l'utente ha inserito da tastiera alla variabile "partite_vinte" dell'istanza corrente
-            this.partite_pareggiate = valori[1];//assegna il secondo valore che l'utente ha inserito da tastiera alla variabile "partite_pareggiate" dell'istanza corrente
-            this.partite_perse = valori[2];//assegna il terzo valore che l'utente ha inserito da tastiera alla variabile "partite_perse" dell'istanza corrente
+            partite_vinte = valori[0];//assegna il primo valore che l'utente ha inserito da tastiera alla variabile "partite_vinte" dell'istanza corrente
+            partite_pareggiate = valori[1];//assegna il secondo valore che l'utente ha inserito da tastiera alla variabile "partite_pareggiate" dell'istanza corrente
+            partite_perse = valori[2];//assegna il terzo valore che l'utente ha inserito da tastiera alla variabile "partite_perse" dell'istanza corrente
         }
         public void InizioAnno()//riporta i valori a zero degli attributi della squadra corrente
         {
-            this.partite_vinte = 0;//porta a 0 il valore della variabile "partite_vinte" nell'istanza corrente
-            this.partite_pareggiate = 0;//porta a 0 il valore della variabile "partite_pareggiate" nell'istanza corrente
-            this.partite_perse = 0;//porta a 0 il valore della variabile "partite_perse" nell'istanza corrente
-            this.gol_fatti = 0;//porta a 0 il valore della variabile "gol_fatti" nell'istanza corrente
-            this.gol_subiti = 0;//porta a 0 il valore della variabile "gol_subiti" nell'istanza corrente
+            partite_vinte = 0;//porta a 0 il valore della variabile "partite_vinte" nell'istanza corrente
+            partite_pareggiate = 0;//porta a 0 il valore della variabile "partite_pareggiate" nell'istanza corrente
+            partite_perse = 0;//porta a 0 il valore della variabile "partite_perse" nell'istanza corrente
+            gol_fatti = 0;//porta a 0 il valore della variabile "gol_fatti" nell'istanza corrente
+            gol_subiti = 0;//porta a 0 il valore della variabile "gol_subiti" nell'istanza corrente
         }
         public int[] GenerazionePartite(int quantita)//genero gli indici della lista delle squadre per le partite in modo e senza doppioni
         {
@@ -169,8 +169,8 @@ namespace SquadraCalcio
             bool controllo;//variabile booleana
             do
             {
-                controllo = false;
-                for (int i = 0; i < (giocatori.Count - 1); i++)
+                controllo = false;//riassegna false a controllo sennò continuerebbe all'infinito
+                for (int i = 0; i < (giocatori.Count - 1); i++)//il ciclo si ripete per la quantità di squadre presenti nella lista bubble diminuito di 1
                 {
                     if (giocatori[i].punteggio < giocatori[i + 1].punteggio)
                     {
@@ -182,10 +182,10 @@ namespace SquadraCalcio
         }
         public void ClassificaDefinitiva(ref List<Squadra> bubble)//funzione per riordinare le squadre in ordine decrescente in base al punteggio_totale di ciascuna di esse, tramite bubble sort
         {
-            bool controllo;
+            bool controllo;//variabile booleana
             do
             {
-                controllo = false;
+                controllo = false;//riassegna false a controllo sennò continuerebbe all'infinito
                 for (int i = 0; i < (bubble.Count - 1); i++)//il ciclo si ripete per la quantità di squadre presenti nella lista bubble diminuito di 1
                 {
                     if (bubble[i].punteggio_totale < bubble[i+1].punteggio_totale)//controlla se il punteggio 
@@ -194,16 +194,16 @@ namespace SquadraCalcio
                         controllo = true;
                     }
                 }
-            } while (controllo);
+            } while (controllo);//si ripete fino a quando non finiscono gli scambi e controllo rimane false
 
         }
         public void IncrementoPunteggio()//aumenta il punteggio_totale della squadra
         {
-            this.punteggio_totale = this.punteggio_totale + this.punteggio;
+            punteggio_totale = punteggio_totale + punteggio;
         }
         public override string ToString()//ritorna una stringa in cui mostra il numero di partite vinte, di partite pareggiate e di partite perse della squadra corrente
         {
-            return $"Numero partite vinte: {this.partite_vinte}\nNumero partite pareggiate: {this.partite_pareggiate}\nNumero partite perse: {this.partite_perse}\n";
+            return $"Numero partite vinte: {partite_vinte}\nNumero partite pareggiate: {partite_pareggiate}\nNumero partite perse: {partite_perse}\n";
         }
 
         static void Main(string[] args)
@@ -222,8 +222,10 @@ namespace SquadraCalcio
             for(int i = 0; i < risposta; i++)
             {
                 Console.WriteLine($"Inserisci il nome della squadra numero {i+1}");
-                selezione = Console.ReadLine();
-                if(squadra.NomiSoloDiversi(nomi, selezione))
+                selezione = Console.ReadLine();//assegna alla stringa selezione, ciò che l'utente scrive
+                if(squadra.NomiSoloDiversi(nomi, selezione))//invoca il metodo NomiSoloDiversi passando come parametri l'array nomi e la stringa selezione,
+                                                            //se ritorna true allora il nome appena inserito dall'utente esiste già e fa ripetere il ciclo
+                                                            //sennò il nome appena inserito viene assegnato all'array nomi all'indice i
                 {
                     Console.WriteLine("Questo nome e' gia' stato inserito");
                     i--;
@@ -233,7 +235,7 @@ namespace SquadraCalcio
                     nomi[i] = selezione;
                 }
             }
-            squadre = squadra.CreaSqaudre(nomi);
+            squadre = squadra.CreaSqaudre(nomi);//invoca il metodo CreaSquadre passando come parametro, l'array nomi, e ritorna la lista che viene assegnata alla lista squadre
             int[] risposte = new int[6];//array di interi per immagazzinare le risposte dell'utente che verranno usate per assegnare le variabili 
             for (int i = 0; i < squadre.Count; i++)
             {
@@ -299,21 +301,21 @@ namespace SquadraCalcio
                         Console.WriteLine("Questa partita è terminata in pareggio");//viene scritto a schermo che la partita è terminata con il pareggio delle due squadre
                         }
                     }
-                    Console.WriteLine("Scrivi No per terminare l'anno");
-                    answer = Console.ReadLine();
+                    Console.WriteLine("Scrivi No per terminare l'anno");//viene scritto a schermo cosa l'utente deve scrivere per terminare l'anno
+                    answer = Console.ReadLine();//assegna ciò che l'utente scrive alla stringa answer
                 }
-                squadra.ClassificaProvvisoria(ref squadre);
-                for(int i  = 0; i < squadre.Count; i++)
+                squadra.ClassificaProvvisoria(ref squadre);//invoca il metodo ClassificaProvvisoria che ordina la lista squadre in base al punteggio di ogni squadra
+                for(int i  = 0; i < squadre.Count; i++)//scrive la classifica della lista squadre e per ogni elemento invoca la funzoine IncrementoPunteggio e InizioAnno
                 {
                     Console.WriteLine($"In {i+1}° posizione abbiamo la squadra {squadre[i].nomesquadra}");
                     squadre[i].IncrementoPunteggio();
                     squadre[i].InizioAnno();
                 }
-                Console.WriteLine("Scrivi yes o y per terminare il campionato");
-                answer = Console.ReadLine();
+                Console.WriteLine("Scrivi yes o y per terminare il campionato");//viene scritto a schermo cosa l'utente deve scrivere per terminare il campionato
+                answer = Console.ReadLine();//assegna ciò che l'utente scrive alla stringa answer
             } while (answer != "yes" && answer != "y");
-            squadra.ClassificaDefinitiva(ref squadre);
-            for (int i = 0; i < squadre.Count; i++)
+            squadra.ClassificaDefinitiva(ref squadre);//invoca il metodo ClassificaProvvisoria che ordina la lista squadre in base al punteggio di ogni singola squadra
+            for (int i = 0; i < squadre.Count; i++)//scrive la classifica della lista squadre
             {
                 Console.WriteLine($"In {i + 1}° posizione abbiamo la squadra {squadre[i].nomesquadra}");
             }
